@@ -1,0 +1,56 @@
+spring:
+  main:
+    web-application-type: reactive
+    banner-mode: off
+  cloud:
+    gateway:
+      routes:
+        - id: Config
+          uri: ${URI_POS_BFF}
+          predicates:
+            Path=/rest/{terminalType}/config
+          filters:
+            - AuthorizationHeaderPrefilter
+            - CachingRequestBodyFilter
+            - ConfigurationFilter
+
+        - id: Register
+          uri: ${URI_POS_BFF}
+          predicates:
+            Path=/rest/poynt/register
+          filters:
+            - AuthorizationHeaderPrefilter
+            - CachingRequestBodyFilter
+            - RegisterFilter
+
+        - id: RegisterSerial
+          uri: ${URI_POS_BFF}
+          predicates:
+            Path=/rest/castles/register
+          filters:
+            - AuthorizationHeaderPrefilter
+            - CachingRequestBodyFilter
+            - RegisterSerialFilter
+
+        - id: Supervision
+          uri: ${URI_POS_BFF}
+          predicates:
+            Path=/supervision
+          filters:
+            - AuthorizationHeaderPrefilter
+            - CachingRequestBodyFilter
+            - SupervisionFilter
+
+        - id: Indirect
+          uri: ${URI_POS_BFF}
+          predicates:
+            Path=/**
+          filters:
+            - AuthorizationHeaderPrefilter
+            - CachingRequestBodyFilter
+            - IndirectFilter
+
+KEYCLOAK_BASE_URL: ${KEYCLOAK_BASE_URL}
+REALM: ${REALM_NAME}
+CLIENT_ID: ${CLIENT_ID}
+CLIENT_SECRET: ${CLIENT_SECRET}
