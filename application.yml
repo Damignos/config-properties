@@ -1,0 +1,25 @@
+logging:
+  config: classpath:log4j2.xml
+management:
+  endpoints:
+    jmx:
+      exposure:
+        exclude: '*'
+    web:
+      exposure:
+        include: info, health, flyway, metrics, prometheus
+  elastic:
+    metrics:
+      export:
+        step: 1m
+server:
+  tomcat:
+    additional-tld-skip-patterns: '*.jar'
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: https://keycloak.preprod.izicap.com/realms/izicap_realm/protocol/openid-connect/certs
+prop:
+  name: default
