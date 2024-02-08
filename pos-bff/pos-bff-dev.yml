@@ -1,2 +1,5 @@
-prop:
-  name: bff-dev
+server:
+  port: ${HTTP_LISTEN_PORT}
+services:
+  terminal-service: ${TERMINAL_SERVICE}
+  shop-service: ${SHOP_SERVICE}

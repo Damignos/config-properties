@@ -21,5 +21,3 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: https://keycloak.preprod.izicap.com/realms/izicap_realm/protocol/openid-connect/certs
-prop:
-  name: default
